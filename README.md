@@ -17,11 +17,13 @@ A comprehensive command-line interface for managing Circles groups with deployme
 ## Installation & Setup
 
 ### Prerequisites
+
 - Node.js 18+
 - npm or yarn
 - Gnosis Chain wallet with xDAI for gas fees
 
 ### Installation
+
 ```bash
 # Clone and install
 git clone https://github.com/skundu42/circles-group-cli.git
@@ -31,13 +33,17 @@ npm run build
 npm link
 ```
 
+**Note**: The CLI is now properly linked and the `cg` command should be available globally. If you encounter any issues, ensure the build completed successfully and try running `npm link` again.
+
 ### Initial Setup
+
 ```bash
 # Configure your wallet and network
 cg setup
 ```
 
 This interactive command will:
+
 - Set up your private key securely
 - Configure network settings (default: Gnosis Chain mainnet)
 - Validate your wallet configuration
@@ -66,20 +72,22 @@ Commands:
   help [command]                display help for command
 ```
 
-
 ## Command Detailed View
 
 The CLI provides two types of group management:
 
 ### Standard Groups
+
 Basic Circles groups with simple member management and trust operations.
 
 ### Base Groups
+
 Advanced groups with membership conditions, batch operations, and administrative capabilities.
 
 ## Standard Groups Commands
 
 ### Deploy Standard Group
+
 ```bash
 cg deploy-group [options]
 ```
@@ -87,11 +95,13 @@ cg deploy-group [options]
 **Description**: Deploy a new standard Circles group with basic functionality.
 
 **Options**:
+
 - `-n, --name <name>` - Group name (required)
 - `-d, --description <description>` - Group description
 - `-m, --members <members>` - Initial members (comma-separated addresses)
 
 **Examples**:
+
 ```bash
 # Interactive deployment
 cg deploy-group
@@ -104,12 +114,14 @@ cg deploy-group --name "Project Team" --members "0x1234...,0x5678..."
 ```
 
 **What it does**:
+
 - Creates a new Circles group contract
 - Registers the group with the Circles protocol
 - Sets up initial trust relationships
 - Returns the group contract address
 
 ### Add Member
+
 ```bash
 cg add-member --group <address> --member <address>
 ```
@@ -117,10 +129,12 @@ cg add-member --group <address> --member <address>
 **Description**: Add a new member to a standard group by establishing trust.
 
 **Options**:
+
 - `-g, --group <address>` - Group contract address (required)
 - `-m, --member <address>` - Member address to add (required)
 
 **Examples**:
+
 ```bash
 # Add a single member
 cg add-member --group 0x1234... --member 0x5678...
@@ -130,11 +144,13 @@ cg add-member --group 0x1234...
 ```
 
 **What it does**:
+
 - Establishes trust relationship between group and new member
 - Allows the new member to participate in group activities
 - Updates group membership status
 
 ### Remove Member
+
 ```bash
 cg remove-member --group <address> --member <address>
 ```
@@ -142,10 +158,12 @@ cg remove-member --group <address> --member <address>
 **Description**: Remove a member from a standard group by revoking trust.
 
 **Options**:
+
 - `-g, --group <address>` - Group contract address (required)
 - `-m, --member <address>` - Member address to remove (required)
 
 **Examples**:
+
 ```bash
 # Remove a member
 cg remove-member --group 0x1234... --member 0x5678...
@@ -155,6 +173,7 @@ cg remove-member --group 0x1234...
 ```
 
 **What it does**:
+
 - Revokes trust relationship between group and member
 - Removes member's ability to participate in group activities
 - Updates group membership status
@@ -162,6 +181,7 @@ cg remove-member --group 0x1234...
 ## Base Groups Commands
 
 ### Deploy Base Group
+
 ```bash
 cg deploy-base-group
 ```
@@ -169,6 +189,7 @@ cg deploy-base-group
 **Description**: Deploy a new Base Group with advanced features including membership conditions and batch operations.
 
 **Interactive Prompts**:
+
 - **Group Name**: Human-readable name for the group
 - **Group Symbol**: 3-8 character symbol (uppercase letters and numbers)
 - **Description**: Detailed description of the group's purpose
@@ -179,6 +200,7 @@ cg deploy-base-group
 - **Initial Conditions**: Comma-separated addresses for initial membership conditions
 
 **Examples**:
+
 ```bash
 # Interactive deployment
 cg deploy-base-group
@@ -193,6 +215,7 @@ cg deploy-base-group
 ```
 
 **What it does**:
+
 - Creates group profile with metadata
 - Deploys Base Group contract using factory
 - Sets up service and fee collection addresses
@@ -200,6 +223,7 @@ cg deploy-base-group
 - Returns group contract address and avatar
 
 ### Set Membership Condition
+
 ```bash
 cg set-condition [options]
 ```
@@ -207,11 +231,13 @@ cg set-condition [options]
 **Description**: Set membership conditions for a Base Group.
 
 **Options**:
+
 - `-g, --group <address>` - Group contract address
 - `-c, --condition <condition>` - Membership condition (address or condition string)
 - `-e, --enabled <boolean>` - Enable/disable the condition
 
 **Examples**:
+
 ```bash
 # Set address-based condition
 cg set-condition --group 0x1234... --condition 0x5678... --enabled true
@@ -224,12 +250,14 @@ cg set-condition --group 0x1234...
 ```
 
 **What it does**:
+
 - Defines who can be part of the group
 - Supports address-based and logic-based conditions
 - Can be enabled or disabled
 - Affects future membership decisions
 
 ### List Membership Conditions
+
 ```bash
 cg list-conditions --group <address>
 ```
@@ -237,15 +265,18 @@ cg list-conditions --group <address>
 **Description**: List all membership conditions for a Base Group.
 
 **Options**:
+
 - `-g, --group <address>` - Group contract address (required)
 
 **Examples**:
+
 ```bash
 # List all conditions
 cg list-conditions --group 0x1234...
 ```
 
 **Output Example**:
+
 ```
 🏛️  Membership Conditions:
 ==================================================
@@ -259,6 +290,7 @@ Total conditions: 2
 ```
 
 ### Set Group Owner
+
 ```bash
 cg set-owner [options]
 ```
@@ -266,10 +298,12 @@ cg set-owner [options]
 **Description**: Change the owner of a Base Group.
 
 **Options**:
+
 - `-g, --group <address>` - Group contract address
 - `-o, --owner <address>` - New owner address
 
 **Examples**:
+
 ```bash
 # Change owner
 cg set-owner --group 0x1234... --owner 0x5678...
@@ -279,11 +313,13 @@ cg set-owner --group 0x1234...
 ```
 
 **What it does**:
+
 - Transfers ownership of the Base Group
 - Only current owner can perform this operation
 - New owner gains administrative privileges
 
 ### Set Group Service
+
 ```bash
 cg set-service [options]
 ```
@@ -291,10 +327,12 @@ cg set-service [options]
 **Description**: Update the service address of a Base Group.
 
 **Options**:
+
 - `-g, --group <address>` - Group contract address
 - `-s, --service <address>` - New service address
 
 **Examples**:
+
 ```bash
 # Update service address
 cg set-service --group 0x1234... --service 0x5678...
@@ -304,11 +342,13 @@ cg set-service --group 0x1234...
 ```
 
 **What it does**:
+
 - Updates the service provider address
 - Affects group service integrations
 - Requires owner permissions
 
 ### Set Fee Collection
+
 ```bash
 cg set-fee-collection [options]
 ```
@@ -316,10 +356,12 @@ cg set-fee-collection [options]
 **Description**: Update the fee collection address of a Base Group.
 
 **Options**:
+
 - `-g, --group <address>` - Group contract address
 - `-f, --fee-collection <address>` - New fee collection address
 
 **Examples**:
+
 ```bash
 # Update fee collection address
 cg set-fee-collection --group 0x1234... --fee-collection 0x5678...
@@ -329,11 +371,13 @@ cg set-fee-collection --group 0x1234...
 ```
 
 **What it does**:
+
 - Updates where group fees are collected
 - Affects revenue distribution
 - Requires owner permissions
 
 ### Register Short Name
+
 ```bash
 cg register-name [options]
 ```
@@ -341,10 +385,12 @@ cg register-name [options]
 **Description**: Register a short name with nonce for a Base Group.
 
 **Options**:
+
 - `-g, --group <address>` - Group contract address
 - `-n, --nonce <number>` - Nonce value for registration
 
 **Examples**:
+
 ```bash
 # Register with nonce
 cg register-name --group 0x1234... --nonce 1
@@ -354,6 +400,7 @@ cg register-name --group 0x1234...
 ```
 
 **What it does**:
+
 - Registers a short, memorable name for the group
 - Uses nonce to ensure uniqueness
 - Makes group easier to identify
@@ -361,6 +408,7 @@ cg register-name --group 0x1234...
 ## Trust Management
 
 ### Trust Batch
+
 ```bash
 cg trust-batch [options]
 ```
@@ -368,11 +416,13 @@ cg trust-batch [options]
 **Description**: Trust multiple avatars in batch (Base Groups only).
 
 **Options**:
+
 - `-g, --group <address>` - Group contract address
 - `-m, --members <addresses>` - Comma-separated avatar addresses
 - `-e, --expiry <timestamp>` - Expiry timestamp for all members (optional)
 
 **Examples**:
+
 ```bash
 # Trust multiple avatars
 cg trust-batch --group 0x1234... --members "0x1111...,0x2222...,0x3333..."
@@ -385,6 +435,7 @@ cg trust-batch --group 0x1234...
 ```
 
 **What it does**:
+
 - Trusts multiple avatars in a single transaction
 - Applies same expiry to all members
 - More efficient than individual trust operations
@@ -393,6 +444,7 @@ cg trust-batch --group 0x1234...
 ## Group Information & Discovery
 
 ### Group Information
+
 ```bash
 cg group-info --group <address>
 ```
@@ -400,21 +452,25 @@ cg group-info --group <address>
 **Description**: Display comprehensive information about a group.
 
 **Options**:
+
 - `-g, --group <address>` - Group contract address (required)
 
 **Examples**:
+
 ```bash
 # Get group information
 cg group-info --group 0x1234...
 ```
 
 **What it shows**:
+
 - Group name and description
 - Member list and trust relationships
 - Token balances and transfers
 - Group configuration details
 
 ### List Members
+
 ```bash
 cg list-members --group <address>
 ```
@@ -422,20 +478,24 @@ cg list-members --group <address>
 **Description**: List all members of a group with trust information.
 
 **Options**:
+
 - `-g, --group <address>` - Group contract address (required)
 
 **Examples**:
+
 ```bash
 # List group members
 cg list-members --group 0x1234...
 ```
 
 **What it shows**:
+
 - All group members
 - Trust relationship details
 - Member addresses and status
 
 ### List Groups
+
 ```bash
 cg list-groups
 ```
@@ -443,12 +503,14 @@ cg list-groups
 **Description**: List all groups you are a member of.
 
 **Examples**:
+
 ```bash
 # List your groups
 cg list-groups
 ```
 
 **What it shows**:
+
 - All groups where you're a member
 - Group addresses and basic information
 - Your role in each group
@@ -456,6 +518,7 @@ cg list-groups
 ## Token Operations
 
 ### Check Balance
+
 ```bash
 cg balance [options]
 ```
@@ -463,10 +526,12 @@ cg balance [options]
 **Description**: Check token balance for a user in a group.
 
 **Options**:
+
 - `-g, --group <address>` - Group contract address (required)
 - `-u, --user <address>` - User address (default: your address)
 
 **Examples**:
+
 ```bash
 # Check your balance
 cg balance --group 0x1234...
@@ -476,11 +541,13 @@ cg balance --group 0x1234... --user 0x5678...
 ```
 
 **What it shows**:
+
 - Token balance in the specified group
 - Balance history and changes
 - Trust limits and available amounts
 
 ### Transfer Tokens
+
 ```bash
 cg transfer [options]
 ```
@@ -488,11 +555,13 @@ cg transfer [options]
 **Description**: Transfer tokens within a group.
 
 **Options**:
+
 - `-g, --group <address>` - Group contract address (required)
 - `-t, --to <address>` - Recipient address (required)
 - `-a, --amount <amount>` - Amount to transfer (required)
 
 **Examples**:
+
 ```bash
 # Transfer tokens
 cg transfer --group 0x1234... --to 0x5678... --amount 100
@@ -502,6 +571,7 @@ cg transfer --group 0x1234...
 ```
 
 **What it does**:
+
 - Transfers tokens from your account to recipient
 - Respects trust limits and group rules
 - Updates balances for both parties
@@ -571,34 +641,70 @@ cg transfer --group <group-address> --to 0xRecipient --amount 50
 
 ## Troubleshooting
 
+### CLI Installation Issues
+
+#### 1. "cg command not found"
+
+```bash
+# Solution: Ensure proper installation
+npm run build
+npm link
+
+# Verify installation
+which cg
+cg --help
+```
+
+#### 2. "Permission denied" when running cg
+
+```bash
+# Solution: Make the CLI executable
+chmod +x dist/src/index.js
+npm link
+```
+
+#### 3. "Module not found" errors
+
+```bash
+# Solution: Rebuild the project
+npm run build
+npm link
+```
+
 ### Common Issues
 
 #### 1. "Wallet not configured"
+
 ```bash
 # Solution: Run setup
 cg setup
 ```
 
 #### 2. "Insufficient funds"
+
 - Ensure you have enough xDAI for gas fees on Gnosis Chain
 - Check your wallet balance
 
 #### 3. "Group not found"
+
 - Verify the group address is correct
 - Check if you're a member of the group
 - Use `cg list-groups` to see your groups
 
 #### 4. "Not authorized"
+
 - Only group owners can perform administrative operations
 - Only group members can trust other members
 - Check your permissions in the group
 
 #### 5. "Failed to create Base Group"
+
 - Check service and fee collection addresses
 - Ensure sufficient gas for transaction
 - Verify network connectivity
 
 #### 6. "Invalid membership condition"
+
 - Check condition format
 - Verify address validity
 - Ensure condition logic is correct
@@ -621,4 +727,3 @@ cg list-groups
 # Verify wallet configuration
 cg setup
 ```
-

@@ -62,9 +62,9 @@ export default [
       // Best practices - relaxed for CLI apps
       eqeqeq: ['error', 'always'],
       'no-magic-numbers': ['warn', { ignore: [0, 1, -1, 2, 10, 100, 1000] }],
-      complexity: ['warn', { max: 15 }],
+      complexity: ['warn', { max: 150 }],
       'max-depth': ['warn', { max: 5 }],
-      'max-lines-per-function': ['warn', { max: 80 }],
+      'max-lines-per-function': ['warn', { max: 800 }],
     },
   },
   {

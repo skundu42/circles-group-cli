@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { execSync } from 'child_process';
 import path from 'path';
 
-const CLI_PATH = path.resolve('./dist/index.js');
+const CLI_PATH = path.resolve('./dist/src/index.js');
 
 // Helper function to run CLI commands safely
 const runCLI = (args: string[]): { stdout: string; stderr: string; exitCode: number } => {
