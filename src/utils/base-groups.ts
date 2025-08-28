@@ -1,5 +1,6 @@
 import { cidV0ToUint8Array } from '@circles-sdk/utils';
 import { ethers } from 'ethers';
+import { Sdk } from '@circles-sdk/sdk';
 import { getSDK } from './circles.js';
 
 // Constants for validation limits
@@ -18,6 +19,9 @@ interface TransactionResponse {
 
 interface TransactionReceipt {
   hash: string;
+  logs: Array<{
+    topics: string[];
+  }>;
 }
 
 // Interface for BaseGroupAvatar with required methods
@@ -75,7 +79,7 @@ export const validateBaseGroupSetup = (setup: BaseGroupSetup): boolean => {
   return true;
 };
 
-const createGroupProfile = async (sdk: any, profile: BaseGroupProfile): Promise<string> => {
+const createGroupProfile = async (sdk: Sdk, profile: BaseGroupProfile): Promise<string> => {
   console.log('📝 Creating group profile...');
 
   const groupProfile = {
@@ -96,7 +100,7 @@ const createGroupProfile = async (sdk: any, profile: BaseGroupProfile): Promise<
 };
 
 const deployBaseGroupContract = async (
-  sdk: any,
+  sdk: Sdk,
   profile: BaseGroupProfile,
   setup: BaseGroupSetup,
   senderAddress: string,
@@ -125,7 +129,7 @@ const deployBaseGroupContract = async (
   return receipt;
 };
 
-const extractGroupAddressFromLogs = (receipt: any, senderAddress: string): string => {
+const extractGroupAddressFromLogs = (receipt: TransactionReceipt, senderAddress: string): string => {
   console.log('🔍 Extracting group address from logs...');
 
   // Try to find the group address from events
@@ -171,7 +175,7 @@ const extractGroupAddressFromLogs = (receipt: any, senderAddress: string): strin
   throw new Error('Could not extract group address from transaction logs');
 };
 
-const verifyAndSetupGroup = async (sdk: any, groupAddress: string, setup: BaseGroupSetup): Promise<void> => {
+const verifyAndSetupGroup = async (sdk: Sdk, groupAddress: string, setup: BaseGroupSetup): Promise<void> => {
   console.log(`✅ Base group created at address: ${groupAddress}`);
   console.log('⏳ Waiting for contract indexing...');
   await new Promise(resolve => setTimeout(resolve, INDEXING_WAIT_TIME));

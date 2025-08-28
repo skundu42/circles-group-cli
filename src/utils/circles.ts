@@ -307,7 +307,7 @@ export const getGroup = async (address: string): Promise<Group> => {
   }
 };
 
-const getGroupInfoFromQuery = async (sdk: any, normalizedAddress: string): Promise<Partial<GroupDetails>> => {
+const getGroupInfoFromQuery = async (sdk: Sdk, normalizedAddress: string): Promise<Partial<GroupDetails>> => {
   try {
     const q = sdk.data.findGroups(1, { groupAddressIn: [normalizedAddress] });
     const row = (await q.getSingleRow) ? await q.getSingleRow() : (await q.getRow) ? await q.getRow() : null;
@@ -329,7 +329,7 @@ const getGroupInfoFromQuery = async (sdk: any, normalizedAddress: string): Promi
   return {};
 };
 
-const getGroupInfoFromAllGroups = async (sdk: any, normalizedAddress: string): Promise<Partial<GroupDetails>> => {
+const getGroupInfoFromAllGroups = async (sdk: Sdk, normalizedAddress: string): Promise<Partial<GroupDetails>> => {
   try {
     const q = sdk.data.findGroups(MAX_GROUP_QUERY_SIZE, {});
     const rows = (await q.getRows) ? await q.getRows() : (await q.getAllRows) ? await q.getAllRows() : [];
@@ -351,7 +351,7 @@ const getGroupInfoFromAllGroups = async (sdk: any, normalizedAddress: string): P
   return {};
 };
 
-const getGroupInfoFromMemberships = async (sdk: any, normalizedAddress: string): Promise<Partial<GroupDetails>> => {
+const getGroupInfoFromMemberships = async (sdk: Sdk, normalizedAddress: string): Promise<Partial<GroupDetails>> => {
   try {
     const q = sdk.data.getGroupMemberships(normalizedAddress, 10);
     const rows = (await q.getRows) ? await q.getRows() : (await q.getAllRows) ? await q.getAllRows() : [];
@@ -371,7 +371,7 @@ const getGroupInfoFromMemberships = async (sdk: any, normalizedAddress: string):
   return {};
 };
 
-const getTokenDetails = async (sdk: any, normalizedAddress: string): Promise<Partial<GroupDetails>> => {
+const getTokenDetails = async (sdk: Sdk, normalizedAddress: string): Promise<Partial<GroupDetails>> => {
   try {
     const token = await sdk.getToken(normalizedAddress);
     const tokenDetails: Partial<GroupDetails> = {};
@@ -491,7 +491,7 @@ export const removeMemberFromGroup = async (groupAddress: string, memberAddress:
 };
 
 const getMembersFromTrustRelations = async (
-  sdk: any,
+  sdk: Sdk,
   normalizedAddress: string,
   members: Set<string>
 ): Promise<void> => {
@@ -516,7 +516,7 @@ const getMembersFromTrustRelations = async (
 };
 
 const getMembersFromGroupMemberships = async (
-  sdk: any,
+  sdk: Sdk,
   normalizedAddress: string,
   members: Set<string>
 ): Promise<void> => {
