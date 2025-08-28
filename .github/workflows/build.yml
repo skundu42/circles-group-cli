@@ -12,7 +12,7 @@ jobs:
     
     strategy:
       matrix:
-        node-version: [20.x]
+        node-version: [24.x]
     
     steps:
     - name: Checkout code
@@ -27,11 +27,14 @@ jobs:
     - name: Install dependencies
       run: npm ci
       
-    - name: Run comprehensive CI checks
-      run: npm run ci
-      
     - name: Build project
       run: npm run build
+      
+    - name: Run linting and formatting checks
+      run: npm run lint:check && npm run format:check && npm run type-check
+      
+    - name: Run tests
+      run: npm run test:run
       
     - name: Verify build output
       run: |
