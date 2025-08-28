@@ -151,7 +151,10 @@ const confirmCreation = async (): Promise<boolean> => {
   return confirm.proceed;
 };
 
-const showDeploymentSummary = (result: any, setup: BaseGroupSetup) => {
+const showDeploymentSummary = (
+  result: { groupAddress: string; profile: BaseGroupProfile; profileCID: string },
+  setup: BaseGroupSetup
+) => {
   console.log(chalk.blue('\n📋 Deployment Summary:'));
   console.log(divider());
   console.log(kv('Group Address', result.groupAddress));
