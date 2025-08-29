@@ -5,12 +5,28 @@
   "license": "MIT",
   "author": "",
   "type": "module",
-  "main": "dist/src/index.js",
+  "main": "dist/index.js",
   "bin": {
-    "cg": "./dist/src/index.js"
+    "cg": "./dist/index.js"
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/skundu42/circles-groups-cli.git"
+  },
+  "homepage": "https://github.com/skundu42/circles-groups-cli#readme",
+  "bugs": {
+    "url": "https://github.com/skundu42/circles-groups-cli/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json",
     "dev": "tsx src/index.ts",
     "start": "node dist/src/index.js",
     "test": "vitest",
@@ -25,7 +41,9 @@
     "format:check": "prettier --check \"src/**/*.{ts,tsx,json,md}\"",
     "type-check": "tsc --noEmit --skipLibCheck --allowJs",
     "ci": "npm run lint:check && npm run format:check && npm run type-check && npm run test:run",
-    "prepare": "husky"
+    "prepare": "husky",
+    "prepublishOnly": "npm run build",
+    "postinstall": "chmod +x dist/index.js"
   },
   "dependencies": {
     "@circles-sdk/abi-v2": "^0.29.1",

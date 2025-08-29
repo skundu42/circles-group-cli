@@ -24,16 +24,28 @@ A comprehensive command-line interface for managing Circles groups with deployme
 
 ### Installation
 
+#### Option 1: Install from npm (Recommended)
+
+```bash
+# Install globally
+npm install -g circles-groups-cli
+
+# Verify installation
+cg --help
+```
+
+#### Option 2: Install from source
+
 ```bash
 # Clone and install
-git clone https://github.com/skundu42/circles-group-cli.git
+git clone https://github.com/skundu42/circles-groups-cli.git
 cd circles-groups-cli
 npm install
 npm run build
 npm link
 ```
 
-**Note**: The CLI is now properly linked and the `cg` command should be available globally. If you encounter any issues, ensure the build completed successfully and try running `npm link` again.
+**Note**: After installation, the `cg` command should be available globally. If you encounter any issues, ensure the build completed successfully and try running `npm link` again.
 
 ### Initial Setup
 

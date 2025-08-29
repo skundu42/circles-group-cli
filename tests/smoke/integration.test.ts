@@ -3,7 +3,7 @@ import { execSync } from 'child_process';
 import path from 'path';
 import fs from 'fs';
 
-const CLI_PATH = path.resolve('./dist/src/index.js');
+const CLI_PATH = path.resolve('./dist/index.js');
 const PACKAGE_PATH = path.resolve('./package.json');
 
 describe('Integration Tests', () => {
@@ -21,8 +21,8 @@ describe('Integration Tests', () => {
       const packageJson = JSON.parse(fs.readFileSync(PACKAGE_PATH, 'utf8'));
 
       expect(packageJson.name).toBe('circles-groups-cli');
-      expect(packageJson.bin.cg).toBe('./dist/src/index.js');
-      expect(packageJson.main).toBe('dist/src/index.js');
+      expect(packageJson.bin.cg).toBe('./dist/index.js');
+      expect(packageJson.main).toBe('dist/index.js');
       expect(packageJson.type).toBe('module');
     });
 
