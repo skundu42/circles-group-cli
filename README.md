@@ -670,8 +670,8 @@ cg --help
 #### 2. "Permission denied" when running cg
 
 ```bash
-# Solution: Make the CLI executable
-chmod +x dist/src/index.js
+# Solution: Rebuild the project to set correct permissions
+npm run build
 npm link
 ```
 
