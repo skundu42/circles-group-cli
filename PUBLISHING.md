@@ -128,7 +128,7 @@ The `.npmignore` file excludes:
 The package is configured as a CLI tool with:
 
 - **Binary name**: `cg`
-- **Entry point**: `dist/src/index.js`
+- **Entry point**: `dist/index.js`
 - **Shebang**: `#!/usr/bin/env node` (already present in source)
 
 ## Updating the Package
@@ -172,7 +172,7 @@ npm publish
 
 4. **"CLI not working after installation"**
    - Verify the shebang is present in the built file
-   - Check file permissions: `chmod +x dist/src/index.js`
+   - Check file permissions: `chmod +x dist/index.js`
 
 ### Pre-publish Checklist
 

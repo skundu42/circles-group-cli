@@ -671,7 +671,7 @@ cg --help
 
 ```bash
 # Solution: Make the CLI executable
-chmod +x dist/src/index.js
+chmod +x dist/index.js
 npm link
 ```
 
