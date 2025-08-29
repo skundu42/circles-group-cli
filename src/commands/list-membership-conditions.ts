@@ -1,9 +1,8 @@
 import chalk from 'chalk';
 import { getMembershipConditions } from '../utils/base-groups.js';
 import { validateAddress } from '../utils/circles.js';
-import { showError, showInfo } from '../utils/ui.js';
+import { showError, showInfo, cleanupTerminal } from '../utils/ui.js';
 
-// Constants
 const DIVIDER_LENGTH = 50;
 
 interface ListMembershipConditionsOptions {
@@ -44,5 +43,7 @@ export const listMembershipConditionsCommand = async (options: ListMembershipCon
     console.log(chalk.cyan(`Total conditions: ${conditions.length}`));
   } catch (error) {
     showError(`Failed to get membership conditions: ${error instanceof Error ? error.message : 'Unknown error'}`);
+  } finally {
+    cleanupTerminal();
   }
 };

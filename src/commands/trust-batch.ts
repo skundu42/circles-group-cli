@@ -2,7 +2,7 @@ import inquirer from 'inquirer';
 import chalk from 'chalk';
 import { trustBatchWithConditions, TrustBatchMember } from '../utils/base-groups.js';
 import { validateAddress } from '../utils/circles.js';
-import { showSuccess, showError, showInfo } from '../utils/ui.js';
+import { showSuccess, showError, showInfo, cleanupTerminal } from '../utils/ui.js';
 
 interface TrustBatchOptions {
   group?: string;
@@ -146,5 +146,7 @@ export const trustBatchCommand = async (options: TrustBatchOptions) => {
     }
   } catch (error) {
     showError(`Failed to perform batch trust: ${error instanceof Error ? error.message : 'Unknown error'}`);
+  } finally {
+    cleanupTerminal();
   }
 };

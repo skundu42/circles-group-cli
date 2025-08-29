@@ -2,7 +2,7 @@ import inquirer from 'inquirer';
 import chalk from 'chalk';
 import { registerShortNameWithNonce } from '../utils/base-groups.js';
 import { validateAddress } from '../utils/circles.js';
-import { showSuccess, showError, showInfo } from '../utils/ui.js';
+import { showSuccess, showError, showInfo, cleanupTerminal } from '../utils/ui.js';
 
 interface RegisterShortNameOptions {
   group?: string;
@@ -74,5 +74,7 @@ export const registerShortNameCommand = async (options: RegisterShortNameOptions
     console.log(chalk.green(`Nonce: ${nonceValue}`));
   } catch (error) {
     showError(`Failed to register short name: ${error instanceof Error ? error.message : 'Unknown error'}`);
+  } finally {
+    cleanupTerminal();
   }
 };

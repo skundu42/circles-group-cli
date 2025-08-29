@@ -2,7 +2,7 @@ import inquirer from 'inquirer';
 import chalk from 'chalk';
 import { setGroupFeeCollection } from '../utils/base-groups.js';
 import { validateAddress } from '../utils/circles.js';
-import { showSuccess, showError, showInfo } from '../utils/ui.js';
+import { showSuccess, showError, showInfo, cleanupTerminal } from '../utils/ui.js';
 
 interface SetGroupFeeCollectionOptions {
   group?: string;
@@ -69,5 +69,7 @@ export const setGroupFeeCollectionCommand = async (options: SetGroupFeeCollectio
     console.log(chalk.green(`New Fee Collection Address: ${feeCollectionAddress}`));
   } catch (error) {
     showError(`Failed to set group fee collection: ${error instanceof Error ? error.message : 'Unknown error'}`);
+  } finally {
+    cleanupTerminal();
   }
 };

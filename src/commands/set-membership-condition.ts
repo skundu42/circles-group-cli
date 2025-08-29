@@ -2,7 +2,7 @@ import inquirer from 'inquirer';
 import chalk from 'chalk';
 import { setMembershipCondition, getMembershipConditions } from '../utils/base-groups.js';
 import { validateAddress } from '../utils/circles.js';
-import { showSuccess, showError, showInfo } from '../utils/ui.js';
+import { showSuccess, showError, showInfo, cleanupTerminal } from '../utils/ui.js';
 
 interface SetMembershipConditionOptions {
   group?: string;
@@ -88,5 +88,7 @@ export const setMembershipConditionCommand = async (options: SetMembershipCondit
     }
   } catch (error) {
     showError(`Failed to set membership condition: ${error instanceof Error ? error.message : 'Unknown error'}`);
+  } finally {
+    cleanupTerminal();
   }
 };

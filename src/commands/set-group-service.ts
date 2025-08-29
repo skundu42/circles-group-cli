@@ -2,7 +2,7 @@ import inquirer from 'inquirer';
 import chalk from 'chalk';
 import { setGroupService } from '../utils/base-groups.js';
 import { validateAddress } from '../utils/circles.js';
-import { showSuccess, showError, showInfo } from '../utils/ui.js';
+import { showSuccess, showError, showInfo, cleanupTerminal } from '../utils/ui.js';
 
 interface SetGroupServiceOptions {
   group?: string;
@@ -75,5 +75,7 @@ export const setGroupServiceCommand = async (options: SetGroupServiceOptions) =>
     console.log(chalk.green(`New Service Address: ${serviceAddress}`));
   } catch (error) {
     showError(`Failed to set group service: ${error instanceof Error ? error.message : 'Unknown error'}`);
+  } finally {
+    cleanupTerminal();
   }
 };
